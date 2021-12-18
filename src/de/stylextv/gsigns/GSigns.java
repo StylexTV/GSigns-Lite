@@ -2,8 +2,10 @@ package de.stylextv.gsigns;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Rotation;
 import org.bukkit.block.BlockFace;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.stylextv.gsigns.command.CommandManager;
@@ -28,7 +30,7 @@ public class GSigns extends JavaPlugin {
 		
 		VirtualFrame f = new VirtualFrame(loc, BlockFace.SOUTH, Rotation.NONE);
 		
-		
+		f.setItem(new ItemStack(Material.APPLE), Bukkit.getPlayer("StylexTV"));
 	}
 	
 	@Override

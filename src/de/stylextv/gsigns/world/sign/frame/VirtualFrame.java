@@ -9,7 +9,16 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemFrame;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.reflect.StructureModifier;
+import com.comphenix.protocol.wrappers.WrappedDataWatcher;
+import com.comphenix.protocol.wrappers.WrappedDataWatcher.Serializer;
+
+import de.stylextv.gsigns.packet.PacketManager;
 import de.stylextv.gsigns.world.scan.entity.EntityFilter;
 import de.stylextv.gsigns.world.scan.entity.EntityScanResult;
 import de.stylextv.gsigns.world.scan.entity.EntityScanner;
@@ -58,8 +67,24 @@ public class VirtualFrame {
 		frame.remove();
 	}
 	
-	public void show() {
-		frame.setItem(null, false);
+	public void setItem(ItemStack item, Player p) {
+		PacketContainer c = new PacketContainer(PacketType.Play.Server.ENTITY_METADATA);
+		
+		StructureModifier<Integer> integers = c.getIntegers();
+		
+		int id = frame.getEntityId();
+		
+		integers.write(0, id);
+		
+		WrappedDataWatcher watcher = new WrappedDataWatcher(frame);
+		
+		Serializer serializer = WrappedDataWatcher.Registry.getItemStackSerializer(false);
+		
+		watcher.setObject(8, serializer, item);
+		
+		c.getWatchableCollectionModifier().write(0, watcher.getWatchableObjects());
+		
+		PacketManager.sendPacket(p, c);
 	}
 	
 	public World getWorld() {
