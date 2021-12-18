@@ -44,6 +44,8 @@ public class AsyncUtil {
 			
 			t.kill();
 		}
+		
+		THREAD_POOL.shutdown();
 	}
 	
 	private static ScheduledTask runTask(ScheduledTask t) {

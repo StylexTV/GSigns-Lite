@@ -19,8 +19,6 @@ public class GSigns extends JavaPlugin {
 		CommandManager.registerPluginCommands();
 		
 		PacketManager.start();
-		
-		AsyncUtil.loopAsync(() -> System.out.println("Hey2"), 1000);
 	}
 	
 	@Override
