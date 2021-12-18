@@ -1,16 +1,10 @@
 package de.stylextv.gsigns;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Rotation;
-import org.bukkit.block.BlockFace;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.stylextv.gsigns.command.CommandManager;
 import de.stylextv.gsigns.packet.PacketManager;
-import de.stylextv.gsigns.world.sign.frame.VirtualFrame;
+import de.stylextv.gsigns.util.async.AsyncUtil;
 
 public class GSigns extends JavaPlugin {
 	
@@ -26,16 +20,12 @@ public class GSigns extends JavaPlugin {
 		
 		PacketManager.start();
 		
-		Location loc = new Location(Bukkit.getWorld("world"), 78, 142, 77);
-		
-		VirtualFrame f = new VirtualFrame(loc, BlockFace.SOUTH, Rotation.NONE);
-		
-		f.setItem(new ItemStack(Material.APPLE), Bukkit.getPlayer("StylexTV"));
+		AsyncUtil.loopAsync(() -> System.out.println("Hey2"), 1000);
 	}
 	
 	@Override
 	public void onDisable() {
-		
+		AsyncUtil.shutdown();
 	}
 	
 	public static GSigns getInstance() {

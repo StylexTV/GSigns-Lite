@@ -5,6 +5,8 @@ author: StylexTV
 main: de.stylextv.gsigns.GSigns
 api-version: 1.18
 
+depend: [ProtocolLib]
+
 commands:
     gsigns:
     gs:
