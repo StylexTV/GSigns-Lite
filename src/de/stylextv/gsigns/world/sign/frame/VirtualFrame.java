@@ -41,8 +41,6 @@ public class VirtualFrame {
 		
 		EntityScanResult r = EntityScanner.scanWorld(w, p);
 		
-		System.out.println(r);
-		
 		if(!r.isEmpty()) {
 			
 			frame = (ItemFrame) r.first();
