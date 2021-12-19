@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AsyncUtil {
 	
-	private static final ThreadPoolExecutor THREAD_POOL = new ThreadPoolExecutor(2, Integer.MAX_VALUE, 60, TimeUnit.SECONDS, new SynchronousQueue<>());
+	private static final ThreadPoolExecutor THREAD_POOL = new ThreadPoolExecutor(4, Integer.MAX_VALUE, 60, TimeUnit.SECONDS, new SynchronousQueue<>());
 	
 	private static CopyOnWriteArrayList<ScheduledTask> tasks = new CopyOnWriteArrayList<>();
 	

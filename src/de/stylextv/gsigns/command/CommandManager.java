@@ -6,7 +6,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 
 import de.stylextv.gsigns.command.argument.ArgumentList;
+import de.stylextv.gsigns.command.commands.CancelCommand;
+import de.stylextv.gsigns.command.commands.CreateCommand;
 import de.stylextv.gsigns.command.commands.HelpCommand;
+import de.stylextv.gsigns.command.commands.VersionCommand;
 import de.stylextv.gsigns.command.execute.PluginCommandExecutor;
 import de.stylextv.gsigns.command.execute.PluginCommandSender;
 import de.stylextv.gsigns.command.execute.result.CommandResult;
@@ -14,7 +17,10 @@ import de.stylextv.gsigns.command.execute.result.CommandResult;
 public class CommandManager {
 	
 	private static final Command[] COMMANDS = new Command[] {
-			new HelpCommand()
+			new CreateCommand(),
+			new CancelCommand(),
+			new HelpCommand(),
+			new VersionCommand()
 	};
 	
 	private static final String[] PLUGIN_COMMANDS = new String[] {

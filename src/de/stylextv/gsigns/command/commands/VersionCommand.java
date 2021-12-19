@@ -1,31 +1,25 @@
 package de.stylextv.gsigns.command.commands;
 
+import de.stylextv.gsigns.Constants;
 import de.stylextv.gsigns.command.Command;
 import de.stylextv.gsigns.command.argument.ArgumentList;
 import de.stylextv.gsigns.command.execute.PluginCommandSender;
 import de.stylextv.gsigns.command.execute.result.CommandResult;
+import de.stylextv.gsigns.util.chat.ChatUtil;
 
-public class CreateCommand extends Command {
+public class VersionCommand extends Command {
 	
-	private static String[] USAGES = new String[] {
-			"",
-			""
-	};
-	
-	public CreateCommand() {
-		super("create", "Creates a sign from a given image or GIF.");
+	public VersionCommand() {
+		super("version", "Shows the installed version of GSigns.", "ver", "v");
 	}
 	
 	@Override
 	public CommandResult execute(PluginCommandSender sender, ArgumentList args) {
+		String s = Constants.COLORED_NAME + " " + Constants.VERSION + " §7by §e" + Constants.AUTHOR;
 		
+		ChatUtil.sendMessage(sender, "Installed: " + s);
 		
 		return CommandResult.SUCCESS;
-	}
-	
-	@Override
-	public String[] getUsages() {
-		return USAGES;
 	}
 	
 }

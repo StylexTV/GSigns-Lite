@@ -5,15 +5,10 @@ import de.stylextv.gsigns.command.argument.ArgumentList;
 import de.stylextv.gsigns.command.execute.PluginCommandSender;
 import de.stylextv.gsigns.command.execute.result.CommandResult;
 
-public class CreateCommand extends Command {
+public class CancelCommand extends Command {
 	
-	private static String[] USAGES = new String[] {
-			"",
-			""
-	};
-	
-	public CreateCommand() {
-		super("create", "Creates a sign from a given image or GIF.");
+	public CancelCommand() {
+		super("cancel", "Cancels the creation process.");
 	}
 	
 	@Override
@@ -21,11 +16,6 @@ public class CreateCommand extends Command {
 		
 		
 		return CommandResult.SUCCESS;
-	}
-	
-	@Override
-	public String[] getUsages() {
-		return USAGES;
 	}
 	
 }

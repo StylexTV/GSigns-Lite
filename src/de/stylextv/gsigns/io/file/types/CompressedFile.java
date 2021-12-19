@@ -1,4 +1,4 @@
-package de.stylextv.gsigns.io.types;
+package de.stylextv.gsigns.io.file.types;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -6,7 +6,10 @@ import java.util.zip.Deflater;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
-public class CompressedFile extends PrimitiveFile {
+import de.stylextv.gsigns.io.file.StreamedFile;
+import de.stylextv.gsigns.io.serialize.Serializer;
+
+public class CompressedFile extends StreamedFile {
 	
 	private static final int COMPRESSION_LEVEL = Deflater.BEST_COMPRESSION;
 	
@@ -36,7 +39,7 @@ public class CompressedFile extends PrimitiveFile {
 	public boolean exists() {
 		if(!super.exists()) return false;
 		
-		int i = readInt();
+		int i = Serializer.INTEGER.readFrom(this);
 		
 		return i == FILE_VERSION;
 	}

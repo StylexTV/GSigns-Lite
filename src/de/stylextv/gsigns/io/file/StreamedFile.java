@@ -1,4 +1,4 @@
-package de.stylextv.gsigns.io;
+package de.stylextv.gsigns.io.file;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,10 +54,29 @@ public class StreamedFile {
 		return null;
 	}
 	
-	public void write(byte[] data) {
+	public byte read() {
 		try {
 			
-			getOutputStream().write(data);
+			return (byte) getInputStream().read();
+			
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		return -1;
+	}
+	
+	public void write(byte[] data) {
+		for(byte b : data) {
+			
+			write(b);
+		}
+	}
+	
+	public void write(byte b) {
+		try {
+			
+			getOutputStream().write(b);
 			
 		} catch (IOException ex) {
 			ex.printStackTrace();
