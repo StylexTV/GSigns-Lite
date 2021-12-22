@@ -24,9 +24,9 @@ public class StreamedAsset extends StreamedResource {
 	
 	@Override
 	protected InputStream inputStream() {
-		GSigns gsigns = GSigns.getInstance();
+		String s = ASSETS_FOLDER + path;
 		
-		return gsigns.getResource(ASSETS_FOLDER + path);
+		return GSigns.getInstance().getResource(s);
 	}
 	
 	@Override
