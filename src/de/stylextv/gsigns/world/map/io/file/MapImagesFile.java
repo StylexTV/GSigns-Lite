@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import de.stylextv.gsigns.io.file.types.CompressedFile;
+import de.stylextv.gsigns.io.resource.types.StreamedFile;
 import de.stylextv.gsigns.io.serialize.Serializer;
 import de.stylextv.gsigns.world.map.MapImage;
 
-public class MapImagesFile extends CompressedFile {
+public class MapImagesFile extends StreamedFile {
 	
-	public MapImagesFile(String path) {
-		super(path);
+	private static final String PATH = "images.dat";
+	
+	public MapImagesFile() {
+		super(PATH);
 	}
 	
 	public List<MapImage> readImages() {

@@ -1,22 +1,22 @@
 package de.stylextv.gsigns.io.serialize.serializers;
 
-import de.stylextv.gsigns.io.file.StreamedFile;
+import de.stylextv.gsigns.io.resource.StreamedResource;
 import de.stylextv.gsigns.io.serialize.Serializer;
 
 public class StringSerializer extends Serializer<String> {
 	
 	@Override
-	public String readFrom(StreamedFile file) {
-		byte[] data = file.readAll();
+	public String readFrom(StreamedResource r) {
+		byte[] data = r.readAll();
 		
 		return new String(data);
 	}
 	
 	@Override
-	public void writeTo(StreamedFile file, String s) {
+	public void writeTo(StreamedResource r, String s) {
 		byte[] data = s.getBytes();
 		
-		file.write(data);
+		r.write(data);
 	}
 	
 }

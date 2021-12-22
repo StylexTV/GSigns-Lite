@@ -1,33 +1,28 @@
-package de.stylextv.gsigns.io.file;
+package de.stylextv.gsigns.io.resource;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.InflaterInputStream;
 
-import de.stylextv.gsigns.Constants;
+import de.stylextv.gsigns.io.serialize.Serializer;
 
-public class StreamedFile {
+public abstract class StreamedResource {
 	
-	private static final String ROOT_FOLDER = "plugins/" + Constants.PLUGIN_ID + "/";
+	private static final int COMPRESSION_LEVEL = Deflater.BEST_COMPRESSION;
 	
-	private File file;
+	private static final int FORMAT_VERSION = 0x9BA2F52;
+	
+	private boolean compress;
 	
 	private InputStream inputStream;
 	
 	private OutputStream outputStream;
 	
-	public StreamedFile(String path) {
-		this(new File(ROOT_FOLDER + path));
-	}
-	
-	private StreamedFile(File f) {
-		this.file = f;
-		
-		f.getParentFile().mkdirs();
+	public StreamedResource(boolean compress) {
+		this.compress = compress;
 	}
 	
 	public byte[] readAll() {
@@ -110,17 +105,15 @@ public class StreamedFile {
 		return 0;
 	}
 	
+	protected abstract InputStream inputStream();
+	protected abstract OutputStream outputStream();
+	
 	public InputStream getInputStream() {
 		if(inputStream == null) {
-			try {
-				
-				InputStream stream = new FileInputStream(file);
-				
-				setInputStream(stream);
-				
-			} catch (FileNotFoundException ex) {
-				ex.printStackTrace();
-			}
+			
+			inputStream = inputStream();
+			
+			if(compress) inputStream = new InflaterInputStream(inputStream);
 		}
 		
 		return inputStream;
@@ -128,34 +121,30 @@ public class StreamedFile {
 	
 	public OutputStream getOutputStream() {
 		if(outputStream == null) {
-			try {
+			
+			outputStream = outputStream();
+			
+			if(compress) {
 				
-				OutputStream stream = new FileOutputStream(file);
+				Deflater deflater = new Deflater(COMPRESSION_LEVEL);
 				
-				setOutputStream(stream);
-				
-			} catch (FileNotFoundException ex) {
-				ex.printStackTrace();
+				outputStream = new DeflaterOutputStream(outputStream, deflater);
 			}
 		}
 		
 		return outputStream;
 	}
 	
-	public void setInputStream(InputStream stream) {
-		this.inputStream = stream;
-	}
-	
-	public void setOutputStream(OutputStream stream) {
-		this.outputStream = stream;
-	}
-	
 	public boolean exists() {
-		return file.exists();
+		if(!compress) return true;
+		
+		int i = Serializer.INTEGER.readFrom(this);
+		
+		return i == FORMAT_VERSION;
 	}
 	
-	public File getFile() {
-		return file;
+	public boolean isCompressed() {
+		return compress;
 	}
 	
 }

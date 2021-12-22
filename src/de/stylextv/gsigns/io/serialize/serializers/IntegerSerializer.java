@@ -2,7 +2,7 @@ package de.stylextv.gsigns.io.serialize.serializers;
 
 import java.nio.ByteBuffer;
 
-import de.stylextv.gsigns.io.file.StreamedFile;
+import de.stylextv.gsigns.io.resource.StreamedResource;
 import de.stylextv.gsigns.io.serialize.Serializer;
 
 public class IntegerSerializer extends Serializer<Integer> {
@@ -10,8 +10,8 @@ public class IntegerSerializer extends Serializer<Integer> {
 	private static final int SIZE_IN_BYTES = 4;
 	
 	@Override
-	public Integer readFrom(StreamedFile file) {
-		byte[] data = file.read(SIZE_IN_BYTES);
+	public Integer readFrom(StreamedResource r) {
+		byte[] data = r.read(SIZE_IN_BYTES);
 		
 		ByteBuffer buffer = ByteBuffer.wrap(data);
 		
@@ -19,14 +19,14 @@ public class IntegerSerializer extends Serializer<Integer> {
 	}
 	
 	@Override
-	public void writeTo(StreamedFile file, Integer i) {
+	public void writeTo(StreamedResource r, Integer i) {
 		ByteBuffer buffer = ByteBuffer.allocate(SIZE_IN_BYTES);
 		
 		buffer.putInt(i);
 		
 		byte[] data = buffer.array();
 		
-		file.write(data);
+		r.write(data);
 	}
 	
 }

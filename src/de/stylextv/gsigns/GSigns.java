@@ -1,5 +1,6 @@
 package de.stylextv.gsigns;
 
+import org.bukkit.map.MapPalette;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.stylextv.gsigns.command.CommandManager;
@@ -22,6 +23,8 @@ public class GSigns extends JavaPlugin {
 		PacketManager.start();
 		
 		MapImageManager.loadImages();
+		
+		System.out.println(MapPalette.getColor((byte) -26));
 	}
 	
 	@Override

@@ -10,14 +10,12 @@ import de.stylextv.gsigns.world.map.io.file.MapImagesFile;
 
 public class MapImageManager {
 	
-	private static final String IMAGES_PATH = "images.dat";
-	
 	private static ConcurrentHashMap<UUID, MapImage> images = new ConcurrentHashMap<>();
 	
 	private static boolean saved;
 	
 	public static void loadImages() {
-		MapImagesFile file = new MapImagesFile(IMAGES_PATH);
+		MapImagesFile file = new MapImagesFile();
 		
 		if(file.exists()) {
 			
@@ -38,7 +36,7 @@ public class MapImageManager {
 	public static void saveImages() {
 		if(saved) return;
 		
-		MapImagesFile file = new MapImagesFile(IMAGES_PATH);
+		MapImagesFile file = new MapImagesFile();
 		
 		Collection<MapImage> c = images.values();
 		

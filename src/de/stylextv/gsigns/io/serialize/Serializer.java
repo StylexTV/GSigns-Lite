@@ -1,6 +1,6 @@
 package de.stylextv.gsigns.io.serialize;
 
-import de.stylextv.gsigns.io.file.StreamedFile;
+import de.stylextv.gsigns.io.resource.StreamedResource;
 import de.stylextv.gsigns.io.serialize.serializers.BooleanSerializer;
 import de.stylextv.gsigns.io.serialize.serializers.CharSerializer;
 import de.stylextv.gsigns.io.serialize.serializers.DoubleSerializer;
@@ -30,7 +30,7 @@ public abstract class Serializer<T> {
 	
 	public static final BooleanSerializer BOOLEAN = new BooleanSerializer();
 	
-	public abstract T readFrom(StreamedFile file);
-	public abstract void writeTo(StreamedFile file, T t);
+	public abstract T readFrom(StreamedResource r);
+	public abstract void writeTo(StreamedResource r, T t);
 	
 }

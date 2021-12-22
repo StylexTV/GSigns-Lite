@@ -2,7 +2,7 @@ package de.stylextv.gsigns.io.serialize.serializers;
 
 import java.nio.ByteBuffer;
 
-import de.stylextv.gsigns.io.file.StreamedFile;
+import de.stylextv.gsigns.io.resource.StreamedResource;
 import de.stylextv.gsigns.io.serialize.Serializer;
 
 public class DoubleSerializer extends Serializer<Double> {
@@ -10,8 +10,8 @@ public class DoubleSerializer extends Serializer<Double> {
 	private static final int SIZE_IN_BYTES = 8;
 	
 	@Override
-	public Double readFrom(StreamedFile file) {
-		byte[] data = file.read(SIZE_IN_BYTES);
+	public Double readFrom(StreamedResource r) {
+		byte[] data = r.read(SIZE_IN_BYTES);
 		
 		ByteBuffer buffer = ByteBuffer.wrap(data);
 		
@@ -19,14 +19,14 @@ public class DoubleSerializer extends Serializer<Double> {
 	}
 	
 	@Override
-	public void writeTo(StreamedFile file, Double d) {
+	public void writeTo(StreamedResource r, Double d) {
 		ByteBuffer buffer = ByteBuffer.allocate(SIZE_IN_BYTES);
 		
 		buffer.putDouble(d);
 		
 		byte[] data = buffer.array();
 		
-		file.write(data);
+		r.write(data);
 	}
 	
 }
