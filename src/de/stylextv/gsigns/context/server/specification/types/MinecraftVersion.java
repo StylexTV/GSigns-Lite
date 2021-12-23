@@ -91,16 +91,26 @@ public class MinecraftVersion extends Specification {
 		versions.add(this);
 	}
 	
+	public boolean isNewerOrEqual(MinecraftVersion v) {
+		return compareTo(v) >= 0;
+	}
+	
+	public boolean isOlderOrEqual(MinecraftVersion v) {
+		return compareTo(v) <= 0;
+	}
+	
 	public boolean isNewerThan(MinecraftVersion v) {
-		int i = v.getID();
-		
-		return i > id;
+		return compareTo(v) > 0;
 	}
 	
 	public boolean isOlderThan(MinecraftVersion v) {
+		return compareTo(v) < 0;
+	}
+	
+	private int compareTo(MinecraftVersion v) {
 		int i = v.getID();
 		
-		return i < id;
+		return Integer.compare(id, i);
 	}
 	
 	public int getID() {

@@ -1,5 +1,6 @@
 package de.stylextv.gsigns.io.serialize;
 
+import de.stylextv.gsigns.image.color.io.serialize.ColorBubbleSerializer;
 import de.stylextv.gsigns.io.resource.StreamedResource;
 import de.stylextv.gsigns.io.serialize.serializers.BooleanSerializer;
 import de.stylextv.gsigns.io.serialize.serializers.CharSerializer;
@@ -15,6 +16,8 @@ import de.stylextv.gsigns.world.map.io.serialize.MapImageSerializer;
 public abstract class Serializer<T> {
 	
 	public static final MapImageSerializer MAP_IMAGE = new MapImageSerializer();
+	
+	public static final ColorBubbleSerializer COLOR_BUBBLE = new ColorBubbleSerializer();
 	
 	public static final StringSerializer STRING = new StringSerializer();
 	public static final CharSerializer CHAR = new CharSerializer();
