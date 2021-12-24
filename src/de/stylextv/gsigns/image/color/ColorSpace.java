@@ -84,7 +84,7 @@ public class ColorSpace {
 	public List<ColorVoxel> scanVoxels(Predicate<ColorVoxel> p) {
 		Stream<ColorVoxel> stream = Stream.of(voxels);
 		
-		stream.filter(p);
+		stream = stream.filter(p);
 		
 		return stream.toList();
 	}

@@ -13,7 +13,7 @@ public class ColorFormat {
 	
 	private static final int INVALID_INDEX = -1;
 	
-	private HashMap<ColorComponent, Integer> indices;
+	private HashMap<ColorComponent, Integer> indices = new HashMap<>();
 	
 	public ColorFormat(int redIndex, int greenIndex, int blueIndex, int alphaIndex) {
 		this(redIndex, greenIndex, blueIndex);
