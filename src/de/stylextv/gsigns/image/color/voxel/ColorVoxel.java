@@ -1,9 +1,15 @@
-package de.stylextv.gsigns.image.color;
+package de.stylextv.gsigns.image.color.voxel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.bukkit.map.MapPalette;
+
+import de.stylextv.gsigns.image.color.ColorSpace;
 import de.stylextv.gsigns.image.color.direction.ColorDirection;
 import de.stylextv.gsigns.util.image.color.ColorComponent;
 import de.stylextv.gsigns.util.image.color.ColorUtil;
@@ -31,6 +37,11 @@ public class ColorVoxel {
 		this.r = ColorUtil.getComponent(rgb, ColorComponent.RED);
 		this.g = ColorUtil.getComponent(rgb, ColorComponent.GREEN);
 		this.b = ColorUtil.getComponent(rgb, ColorComponent.BLUE);
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void updateColor() {
+		color = MapPalette.matchColor(r, g, b);
 	}
 	
 	public boolean isAtBoundary() {
@@ -107,10 +118,18 @@ public class ColorVoxel {
 		this.color = color;
 	}
 	
-	public static List<ColorVoxel> fromRGBs(List<Integer> rgbs) {
-		Stream<Integer> stream = rgbs.stream();
+	public static int[] toRGBs(Collection<ColorVoxel> voxels) {
+		Stream<ColorVoxel> stream = voxels.stream();
 		
-		Stream<ColorVoxel> mapped = stream.map((rgb) -> new ColorVoxel(rgb));
+		IntStream mapped = stream.mapToInt((v) -> v.getRGB());
+		
+		return mapped.toArray();
+	}
+	
+	public static List<ColorVoxel> fromRGBs(int[] rgbs) {
+		IntStream stream = Arrays.stream(rgbs);
+		
+		Stream<ColorVoxel> mapped = stream.mapToObj((rgb) -> new ColorVoxel(rgb));
 		
 		return mapped.toList();
 	}

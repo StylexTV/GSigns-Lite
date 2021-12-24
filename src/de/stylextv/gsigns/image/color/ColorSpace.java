@@ -1,12 +1,16 @@
 package de.stylextv.gsigns.image.color;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import de.stylextv.gsigns.context.server.ServerContext;
 import de.stylextv.gsigns.context.server.specification.types.MinecraftVersion;
 import de.stylextv.gsigns.image.color.io.ColorSpaceLocation;
 import de.stylextv.gsigns.image.color.io.asset.ColorSpaceAsset;
+import de.stylextv.gsigns.image.color.voxel.ColorVoxel;
 import de.stylextv.gsigns.util.image.color.ColorFormat;
 import de.stylextv.gsigns.util.image.color.ColorUtil;
 
@@ -23,14 +27,45 @@ public class ColorSpace {
 		}
 	}
 	
-	// TODO addBubble
-	
-	private List<ColorBubble> bubbles() {
-		
+	public void update() {
+		for(ColorVoxel v : voxels) {
+			
+			v.updateColor();
+		}
 	}
 	
-	private List<ColorVoxel> voxels() {
+	public void fill(int rgb, byte color) {
+		List<ColorVoxel> list = new ArrayList<>();
 		
+		ColorVoxel start = getVoxel(rgb);
+		
+		list.add(start);
+		
+		while(!list.isEmpty()) {
+			
+			start = list.remove(0);
+			
+			start.setColor(color);
+			
+			List<ColorVoxel> neighbours = start.neighbours();
+			
+			neighbours.forEach((v) -> {
+				
+				if(v.getColor() == color) return;
+				
+				list.add(v);
+			});
+		}
+	}
+	
+	public List<ColorBubble> bubbles() {
+		HashSet<Byte> colors = colors();
+		
+		Stream<Byte> stream = colors.stream();
+		
+		Stream<ColorBubble> mapped = stream.map((color) -> ColorBubble.fromSpace(this, color));
+		
+		return mapped.toList();
 	}
 	
 	private HashSet<Byte> colors() {
@@ -44,6 +79,14 @@ public class ColorSpace {
 		}
 		
 		return colors;
+	}
+	
+	public List<ColorVoxel> scanVoxels(Predicate<ColorVoxel> p) {
+		Stream<ColorVoxel> stream = Stream.of(voxels);
+		
+		stream.filter(p);
+		
+		return stream.toList();
 	}
 	
 	public byte getColor(int rgb) {

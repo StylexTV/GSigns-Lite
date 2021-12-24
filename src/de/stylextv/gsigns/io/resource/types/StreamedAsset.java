@@ -1,5 +1,7 @@
 package de.stylextv.gsigns.io.resource.types;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -29,8 +31,17 @@ public class StreamedAsset extends StreamedResource {
 		return GSigns.getInstance().getResource(s);
 	}
 	
+	// TODO remove
 	@Override
 	protected OutputStream outputStream() {
+		try {
+			
+			return new FileOutputStream(path);
+			
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		
 		return null;
 	}
 	
