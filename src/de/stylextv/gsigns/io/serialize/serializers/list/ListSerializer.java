@@ -2,13 +2,12 @@ package de.stylextv.gsigns.io.serialize.serializers.list;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import de.stylextv.gsigns.io.resource.StreamedResource;
 import de.stylextv.gsigns.io.serialize.Serializer;
 
-public abstract class ListSerializer<T,R extends Serializer<T>> extends Serializer<List<T>> {
+public class ListSerializer<T,R extends Serializer<T>> extends Serializer<List<T>> {
 	
 	private Serializer<T> serializer;
 	
@@ -40,15 +39,11 @@ public abstract class ListSerializer<T,R extends Serializer<T>> extends Serializ
 	
 	@Override
 	public void writeTo(StreamedResource r, List<T> list) {
-		writeTo(r, list);
-	}
-	
-	public void writeTo(StreamedResource r, Collection<T> c) {
-		int l = c.size();
+		int l = list.size();
 		
 		Serializer.INTEGER.writeTo(r, l);
 		
-		c.forEach((t) -> serializer.writeTo(r, t));
+		list.forEach((t) -> serializer.writeTo(r, t));
 	}
 	
 	public Serializer<T> getSerializer() {

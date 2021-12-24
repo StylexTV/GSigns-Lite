@@ -18,7 +18,7 @@ public class ColorSpaceLocation {
 	}
 	
 	public boolean isCompatibleWith(MinecraftVersion v) {
-		return v.isNewerThan(v);
+		return v.isNewerOrEqual(version);
 	}
 	
 	public String getPath() {

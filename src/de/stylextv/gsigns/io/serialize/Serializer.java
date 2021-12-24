@@ -29,26 +29,26 @@ public abstract class Serializer<T> {
 	public static final StringSerializer STRING = new StringSerializer();
 	public static final CharSerializer CHAR = new CharSerializer();
 	
-	public static final UUIDListSerializer UUID_LIST = new UUIDListSerializer();
 	public static final UUIDSerializer UUID = new UUIDSerializer();
+	public static final UUIDListSerializer UUID_LIST = new UUIDListSerializer();
 	
-	public static final DoubleListSerializer DOUBLE_LIST = new DoubleListSerializer();
 	public static final DoubleSerializer DOUBLE = new DoubleSerializer();
+	public static final DoubleListSerializer DOUBLE_LIST = new DoubleListSerializer();
 	
-	public static final FloatListSerializer FLOAT_LIST = new FloatListSerializer();
 	public static final FloatSerializer FLOAT = new FloatSerializer();
+	public static final FloatListSerializer FLOAT_LIST = new FloatListSerializer();
 	
-	public static final LongListSerializer LONG_LIST = new LongListSerializer();
 	public static final LongSerializer LONG = new LongSerializer();
+	public static final LongListSerializer LONG_LIST = new LongListSerializer();
 	
-	public static final IntegerListSerializer INTEGER_LIST = new IntegerListSerializer();
 	public static final IntegerSerializer INTEGER = new IntegerSerializer();
+	public static final IntegerListSerializer INTEGER_LIST = new IntegerListSerializer();
 	
-	public static final ShortListSerializer SHORT_LIST = new ShortListSerializer();
 	public static final ShortSerializer SHORT = new ShortSerializer();
+	public static final ShortListSerializer SHORT_LIST = new ShortListSerializer();
 	
-	public static final BooleanListSerializer BOOLEAN_LIST = new BooleanListSerializer();
 	public static final BooleanSerializer BOOLEAN = new BooleanSerializer();
+	public static final BooleanListSerializer BOOLEAN_LIST = new BooleanListSerializer();
 	
 	public abstract T readFrom(StreamedResource r);
 	public abstract void writeTo(StreamedResource r, T t);
