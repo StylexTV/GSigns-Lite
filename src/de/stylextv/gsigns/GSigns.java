@@ -30,14 +30,18 @@ public class GSigns extends JavaPlugin {
 		
 //		ColorSpace s = new ColorSpace();
 //		
-//		s.update();
+////		s.update();
 //		
 //		ColorSpaceAsset a = new ColorSpaceAsset("1_16.dat");
 //		
 //		a.writeSpace(s);
+//		
+//		a.close();
+		
+		System.out.println("enabling...");
 		
 		System.out.println(ColorSpace.getSpace().getColor(ColorUtil.combineComponents(ColorFormat.RGB, 255, 0, 0)));
-		System.out.println(MapPalette.getColor((byte) 0));
+		System.out.println(MapPalette.getColor((byte) -128));
 	}
 	
 	@Override

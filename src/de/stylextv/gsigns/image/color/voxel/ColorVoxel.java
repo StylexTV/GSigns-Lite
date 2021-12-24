@@ -106,10 +106,6 @@ public class ColorVoxel {
 		return space;
 	}
 	
-	public void setSpace(ColorSpace s) {
-		this.space = s;
-	}
-	
 	public byte getColor() {
 		return color;
 	}

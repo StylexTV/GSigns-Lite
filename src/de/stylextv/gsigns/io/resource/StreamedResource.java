@@ -129,6 +129,8 @@ public abstract class StreamedResource {
 				Deflater deflater = new Deflater(COMPRESSION_LEVEL);
 				
 				outputStream = new DeflaterOutputStream(outputStream, deflater);
+				
+				Serializer.INTEGER.writeTo(this, FORMAT_VERSION);
 			}
 		}
 		

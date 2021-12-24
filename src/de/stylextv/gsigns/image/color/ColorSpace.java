@@ -118,7 +118,9 @@ public class ColorSpace {
 			
 			ColorSpaceAsset a = new ColorSpaceAsset(l);
 			
-			space = a.readSpace();
+			if(a.exists()) space = a.readSpace();
+			
+			a.close();
 		}
 		
 		return space;
